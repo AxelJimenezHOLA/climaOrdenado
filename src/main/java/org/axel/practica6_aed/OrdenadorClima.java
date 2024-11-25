@@ -12,8 +12,8 @@ public class OrdenadorClima {
         Comparator<ReporteClima> comparador = obtenerComparador(campoOrdenar);
 
         switch (tipo) {
-            case Quick -> climaOrdenador.hacerQuickSort(reportesArr, 0, reportesArr.length-1, comparador);
-            case Merge -> climaOrdenador.hacerMergeSort(reportesArr, 0, reportesArr.length-1, comparador);
+            case Quick -> climaOrdenador.hacerQuickSort(reportesArr, 0, reportesArr.length - 1, comparador);
+            case Merge -> climaOrdenador.hacerMergeSort(reportesArr, 0, reportesArr.length - 1, comparador);
             case Shell -> climaOrdenador.hacerShellSort(reportesArr, comparador);
             case Selection -> climaOrdenador.hacerSelectionSort(reportesArr, comparador);
             case Radix -> {
@@ -32,7 +32,8 @@ public class OrdenadorClima {
     }
 
 
-    private void reagregarReportesOrdenados(ArrayList<ReporteClima> reportes, int[] atributosOrdenados, OrdenarPor campoOrdenar) {
+    private void reagregarReportesOrdenados(ArrayList<ReporteClima> reportes, int[] atributosOrdenados,
+                                            OrdenarPor campoOrdenar) {
         ArrayList<ReporteClima> reportesOrdenados = new ArrayList<>(reportes.size());
 
         for (int atributoOrdenado : atributosOrdenados) {
@@ -46,7 +47,8 @@ public class OrdenadorClima {
         reportes.addAll(reportesOrdenados);
     }
 
-    private ReporteClima encontrarYRetirarReporte(ArrayList<ReporteClima> reportes, int valorAtributo, OrdenarPor campoOrdenar) {
+    private ReporteClima encontrarYRetirarReporte(ArrayList<ReporteClima> reportes, int valorAtributo,
+                                                  OrdenarPor campoOrdenar) {
         for (int i = 0; i < reportes.size(); i++) {
             ReporteClima reporte = reportes.get(i);
             int valueToCompare = switch (campoOrdenar) {

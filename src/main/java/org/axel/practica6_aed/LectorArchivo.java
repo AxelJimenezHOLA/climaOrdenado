@@ -27,7 +27,7 @@ public class LectorArchivo {
                 datos[2],                         // Tipo de precipitación
                 Double.parseDouble(datos[3]),     // Temperatura real
                 Double.parseDouble(datos[4]),     // Temperatura aparente
-                Double.parseDouble(datos[5])*100, // Humedad
+                Double.parseDouble(datos[5]) * 100, // Humedad
                 Double.parseDouble(datos[6]),     // Velocidad del viento
                 Double.parseDouble(datos[7]),     // Rodamiento del viento
                 Double.parseDouble(datos[8]),     // Visibilidad

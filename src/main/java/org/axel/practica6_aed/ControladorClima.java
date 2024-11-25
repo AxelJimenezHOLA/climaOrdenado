@@ -1,11 +1,11 @@
 package org.axel.practica6_aed;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
-import javafx.collections.FXCollections;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.ArrayList;
@@ -14,49 +14,71 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ControladorClima {
-    // Comboboxes
-    @FXML private ComboBox<OrdenarPor> campoOrdenarComboBox;
-
-    // Checkboxes
-    @FXML private CheckBox quickCheckBox;
-    @FXML private CheckBox mergeCheckBox;
-    @FXML private CheckBox shellCheckBox;
-    @FXML private CheckBox selectionCheckBox;
-    @FXML private CheckBox radixCheckBox;
-    @FXML private CheckBox sortCheckBox;
-    @FXML private CheckBox parallelCheckBox;
-
-    // Botones y labels
-    @FXML private Button ordenarButton;
-    @FXML private Button randomizarButton;
-    @FXML private Label tiempoLabel;
-
-    // Tabla
-    @FXML private TableView<ReporteClima> datosTable;
-    @FXML private TableColumn<ReporteClima, Double> temperaturaRealColumn = new TableColumn<>("Temperatura");
-    @FXML private TableColumn<ReporteClima, Double> temperaturaAparenteColumn = new TableColumn<>("Temperatura Aparente");
-    @FXML private TableColumn<ReporteClima, Double> humedadColumn = new TableColumn<>("Humedad");
-    @FXML private TableColumn<ReporteClima, Double> velocidadVientoColumn = new TableColumn<>("Velocidad Viento");
-    @FXML private TableColumn<ReporteClima, Double> rodamientoVientoColumn = new TableColumn<>("Rodamiento Viento");
-    @FXML private TableColumn<ReporteClima, Double> visibilidadColumn = new TableColumn<>("Visibilidad");
-    @FXML private TableColumn<ReporteClima, Double> presionColumn = new TableColumn<>("Presión");
-
-    // Gráficas
-    @FXML private BarChart<String, Number> temperaturaRealChart;
-    @FXML private BarChart<String, Number> temperaturaAparenteChart;
-    @FXML private BarChart<String, Number> humedadChart;
-    @FXML private BarChart<String, Number> velocidadVientoChart;
-    @FXML private BarChart<String, Number> rodamientoVientoChart;
-    @FXML private BarChart<String, Number> visibilidadChart;
-    @FXML private BarChart<String, Number> presionChart;
-    @FXML private BarChart<String, Number> tiempoEjecucionChart;
-
-    // Más atributos
-    private ArrayList<ReporteClima> reportes;
+    private static final int INTERVALO_DATOS_GRAFICA = 100;
     private final OrdenadorClima ordenadorClima = new OrdenadorClima();
     private final LectorArchivo lectorArchivo = new LectorArchivo();
     private final Map<String, Double> tiemposEjecucion = new HashMap<>();
-    private static final int INTERVALO_DATOS_GRAFICA = 100;
+    // Comboboxes
+    @FXML
+    private ComboBox<OrdenarPor> campoOrdenarComboBox;
+    // Checkboxes
+    @FXML
+    private CheckBox quickCheckBox;
+    @FXML
+    private CheckBox mergeCheckBox;
+    @FXML
+    private CheckBox shellCheckBox;
+    @FXML
+    private CheckBox selectionCheckBox;
+    @FXML
+    private CheckBox radixCheckBox;
+    @FXML
+    private CheckBox sortCheckBox;
+    @FXML
+    private CheckBox parallelCheckBox;
+    // Botones y labels
+    @FXML
+    private Button ordenarButton;
+    @FXML
+    private Button randomizarButton;
+    @FXML
+    private Label tiempoLabel;
+    // Tabla
+    @FXML
+    private TableView<ReporteClima> datosTable;
+    @FXML
+    private TableColumn<ReporteClima, Double> temperaturaRealColumn = new TableColumn<>("Temperatura");
+    @FXML
+    private TableColumn<ReporteClima, Double> temperaturaAparenteColumn = new TableColumn<>("Temperatura Aparente");
+    @FXML
+    private TableColumn<ReporteClima, Double> humedadColumn = new TableColumn<>("Humedad");
+    @FXML
+    private TableColumn<ReporteClima, Double> velocidadVientoColumn = new TableColumn<>("Velocidad Viento");
+    @FXML
+    private TableColumn<ReporteClima, Double> rodamientoVientoColumn = new TableColumn<>("Rodamiento Viento");
+    @FXML
+    private TableColumn<ReporteClima, Double> visibilidadColumn = new TableColumn<>("Visibilidad");
+    @FXML
+    private TableColumn<ReporteClima, Double> presionColumn = new TableColumn<>("Presión");
+    // Gráficas
+    @FXML
+    private BarChart<String, Number> temperaturaRealChart;
+    @FXML
+    private BarChart<String, Number> temperaturaAparenteChart;
+    @FXML
+    private BarChart<String, Number> humedadChart;
+    @FXML
+    private BarChart<String, Number> velocidadVientoChart;
+    @FXML
+    private BarChart<String, Number> rodamientoVientoChart;
+    @FXML
+    private BarChart<String, Number> visibilidadChart;
+    @FXML
+    private BarChart<String, Number> presionChart;
+    @FXML
+    private BarChart<String, Number> tiempoEjecucionChart;
+    // Más atributos
+    private ArrayList<ReporteClima> reportes;
 
     @FXML
     public void initialize() {
@@ -75,7 +97,7 @@ public class ControladorClima {
     }
 
     @FXML
-    protected void onOrdenarButtonClick() {
+    private void onOrdenarButtonClick() {
         OrdenarPor campoOrdenar = campoOrdenarComboBox.getValue();
         long tiempoInicio = System.nanoTime();
 
@@ -97,7 +119,8 @@ public class ControladorClima {
                 firstMethodExecuted = true;
             }
             if (selectionCheckBox.isSelected()) {
-                ejecutarOrdenamiento(TipoOrdenamiento.Selection, campoOrdenar, reportesOriginales, !firstMethodExecuted);
+                ejecutarOrdenamiento(TipoOrdenamiento.Selection, campoOrdenar, reportesOriginales,
+                        !firstMethodExecuted);
                 firstMethodExecuted = true;
             }
             if (radixCheckBox.isSelected()) {
@@ -121,12 +144,14 @@ public class ControladorClima {
         }
     }
 
-    @FXML void onRandomizarButtonClick() {
+    @FXML
+    private void onRandomizarButtonClick() {
         Collections.shuffle(reportes);
         ponerDatosEnTabla();
     }
 
-    private void ejecutarOrdenamiento(TipoOrdenamiento tipo, OrdenarPor campoOrdenar, ArrayList<ReporteClima> reportesOriginales, boolean esElPrimero) {
+    private void ejecutarOrdenamiento(TipoOrdenamiento tipo, OrdenarPor campoOrdenar,
+                                      ArrayList<ReporteClima> reportesOriginales, boolean esElPrimero) {
         ArrayList<ReporteClima> reportesCopia = new ArrayList<>(reportesOriginales);
         long startTime = System.nanoTime();
         ordenadorClima.ordenarReportesClima(reportesCopia, campoOrdenar, tipo);

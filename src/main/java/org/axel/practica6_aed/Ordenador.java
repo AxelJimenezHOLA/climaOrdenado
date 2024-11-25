@@ -3,7 +3,10 @@ package org.axel.practica6_aed;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public class Ordenador<T> {
     public void hacerQuickSort(T[] arreglo, int inicio, int fin, Comparator<T> comparador) {
