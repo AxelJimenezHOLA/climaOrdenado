@@ -133,6 +133,11 @@ public class ControladorClima {
         actualizarGraficas();
     }
 
+    @FXML
+    private void onCampoElegido() {
+        ordenarButton.setDisable(false);
+    }
+
     private void ejecutarOrdenamiento(TipoOrdenamiento tipo, OrdenarPor campoOrdenar,
                                       ArrayList<ReporteClima> reportesOriginales, boolean esElPrimero) {
         ArrayList<ReporteClima> reportesCopia = new ArrayList<>(reportesOriginales);

@@ -38,8 +38,8 @@ public class OrdenadorClima {
                 int[] subArr = obtenerSubarreglo(reportes, campoOrdenar);
                 startTime = System.nanoTime();
                 climaOrdenador.hacerRadixSort(subArr);
-                endTime = System.nanoTime();
                 reagregarReportesOrdenados(reportes, subArr, campoOrdenar);
+                endTime = System.nanoTime();
                 return endTime - startTime;
             }
             case Regular -> {
