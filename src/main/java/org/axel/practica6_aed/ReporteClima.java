@@ -1,5 +1,9 @@
 package org.axel.practica6_aed;
 
+/**
+ * Un reporte del clima representa como atributos todas las líneas del archivo .csv del clima.
+ * Realmente solo se toman en cuenta los valores numéricos para el ordenamiento.
+ */
 public class ReporteClima {
     private final String fecha;
     private final String resumenCorto;
@@ -14,6 +18,9 @@ public class ReporteClima {
     private final double presion;
     private final String resumenDiario;
 
+    /**
+     * Constructor que recibe todos los atributos como parámetros.
+     */
     public ReporteClima(String fecha, String resumenCorto, String tipoPrecipitacion, double temperaturaReal,
                         double temperaturaAparente, double humedad, double velocidadViento, double rodamientoViento,
                         double visibilidad, double cubiertaRuidosa, double presion, String resumenDiario) {
@@ -31,6 +38,7 @@ public class ReporteClima {
         this.resumenDiario = resumenDiario;
     }
 
+    // Getters y setters de los atributos
     public String getFecha() {
         return fecha;
     }

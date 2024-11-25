@@ -7,28 +7,57 @@ import java.util.Comparator;
 public class OrdenadorClima {
     private final Ordenador<ReporteClima> climaOrdenador = new Ordenador<>();
 
-    public void ordenarReportesClima(ArrayList<ReporteClima> reportes, OrdenarPor campoOrdenar, TipoOrdenamiento tipo) {
+    public double ordenarReportesClima(ArrayList<ReporteClima> reportes, OrdenarPor campoOrdenar, TipoOrdenamiento tipo) {
         ReporteClima[] reportesArr = reportes.toArray(new ReporteClima[0]);
         Comparator<ReporteClima> comparador = obtenerComparador(campoOrdenar);
+        long startTime;
+        long endTime;
 
         switch (tipo) {
-            case Quick -> climaOrdenador.hacerQuickSort(reportesArr, 0, reportesArr.length - 1, comparador);
-            case Merge -> climaOrdenador.hacerMergeSort(reportesArr, 0, reportesArr.length - 1, comparador);
-            case Shell -> climaOrdenador.hacerShellSort(reportesArr, comparador);
-            case Selection -> climaOrdenador.hacerSelectionSort(reportesArr, comparador);
+            case Quick -> {
+                startTime = System.nanoTime();
+                climaOrdenador.hacerQuickSort(reportesArr, 0, reportesArr.length - 1, comparador);
+                endTime = System.nanoTime();
+            }
+            case Merge -> {
+                startTime = System.nanoTime();
+                climaOrdenador.hacerMergeSort(reportesArr, 0, reportesArr.length - 1, comparador);
+                endTime = System.nanoTime();
+            }
+            case Shell -> {
+                startTime = System.nanoTime();
+                climaOrdenador.hacerShellSort(reportesArr, comparador);
+                endTime = System.nanoTime();
+            }
+            case Selection -> {
+                startTime = System.nanoTime();
+                climaOrdenador.hacerSelectionSort(reportesArr, comparador);
+                endTime = System.nanoTime();
+            }
             case Radix -> {
                 int[] subArr = obtenerSubarreglo(reportes, campoOrdenar);
+                startTime = System.nanoTime();
                 climaOrdenador.hacerRadixSort(subArr);
+                endTime = System.nanoTime();
                 reagregarReportesOrdenados(reportes, subArr, campoOrdenar);
-                return;
+                return endTime - startTime;
             }
-            case Regular -> Arrays.sort(reportesArr, comparador);
-            case Parallel -> Arrays.parallelSort(reportesArr, comparador);
+            case Regular -> {
+                startTime = System.nanoTime();
+                Arrays.sort(reportesArr, comparador);
+                endTime = System.nanoTime();
+            }
+            case Parallel -> {
+                startTime = System.nanoTime();
+                Arrays.parallelSort(reportesArr, comparador);
+                endTime = System.nanoTime();
+            }
             default -> throw new IllegalStateException("Valor no esperado: " + tipo);
         }
 
         reportes.clear();
         reportes.addAll(Arrays.asList(reportesArr));
+        return endTime - startTime;
     }
 
 

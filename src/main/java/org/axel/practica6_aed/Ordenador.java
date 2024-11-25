@@ -9,6 +9,10 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Ordenador<T> {
+    /**
+     * Realiza un Quick Sort al arreglo de tipo T, eligiendo un punto de inicio y final.
+     * El comparador nos permite decidir cómo deseamos ordenar el arreglo.
+     */
     public void hacerQuickSort(T[] arreglo, int inicio, int fin, Comparator<T> comparador) {
         try {
             if (inicio < fin) {
@@ -23,6 +27,9 @@ public class Ordenador<T> {
         }
     }
 
+    /**
+     * Permite particionar el arreglo según un pivot.
+     */
     private int particionar(T[] arreglo, int inicio, int fin, Comparator<T> comparador) {
         T pivot = arreglo[fin];
         int i = inicio - 1;
@@ -38,6 +45,11 @@ public class Ordenador<T> {
         return i + 1;
     }
 
+    /**
+     * Realiza un ordenamiento mediante el algoritmo Merge Sort.
+     * Este algoritmo consiste en dividir el arreglo en subarreglos
+     * para posteriormente ordenarlos.
+     */
     public void hacerMergeSort(T[] arreglo, int inicio, int fin, Comparator<T> comparador) {
         try {
             if (inicio < fin) {
@@ -55,6 +67,9 @@ public class Ordenador<T> {
         }
     }
 
+    /**
+     *
+     */
     private void mergeAuxiliar(T[] arreglo, int inicio, int medio, int fin, Comparator<T> comparador) {
         int n1 = medio - inicio + 1;
         int n2 = fin - medio;
